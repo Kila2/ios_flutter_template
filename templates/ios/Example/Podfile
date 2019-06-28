@@ -11,3 +11,6 @@ target '${POD_NAME}_Example' do
     ${INCLUDED_PODS}
   end
 end
+
+flutter_application_path = '../../'
+eval(File.read(File.join(flutter_application_path, '.ios', 'Flutter', 'podhelper.rb')), binding)

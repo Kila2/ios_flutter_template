@@ -70,13 +70,12 @@ module Pod
     def run
       @message_bank.welcome_message
 
-      platform = self.ask_with_answers("What platform do you want to use?", ["iOS", "macOS"]).to_sym
-
+      platform = "ios".to_sym #self.ask_with_answers("What platform do you want to use?", ["iOS", "macOS"]).to_sym
       case platform
         when :macos
           ConfigureMacOSSwift.perform(configurator: self)
         when :ios
-          framework = self.ask_with_answers("What language do you want to use?", ["Swift", "ObjC"]).to_sym
+          framework = "objc".to_sym #= self.ask_with_answers("What language do you want to use?", ["Swift", "ObjC"]).to_sym
           case framework
             when :swift
               ConfigureSwift.perform(configurator: self)
@@ -124,7 +123,7 @@ module Pod
     end
 
     def replace_variables_in_files
-      file_names = ['POD_LICENSE', 'POD_README.md', 'NAME.podspec', '.travis.yml', podfile_path]
+      file_names = ['POD_LICENSE', 'POD_README.md', 'NAME.podspec', 'NAMEFlutterModule.podspec', '.travis.yml', podfile_path]
       file_names.each do |file_name|
         text = File.read(file_name)
         text.gsub!("${POD_NAME}", @pod_name)
@@ -175,6 +174,7 @@ module Pod
       FileUtils.mv "POD_README.md", "README.md"
       FileUtils.mv "POD_LICENSE", "LICENSE"
       FileUtils.mv "NAME.podspec", "#{pod_name}.podspec"
+      FileUtils.mv "NAMEFlutterModule.podspec", "#{pod_name}FlutterModule.podspec"
     end
 
     def rename_classes_folder

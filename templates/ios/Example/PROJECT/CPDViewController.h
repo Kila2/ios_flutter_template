@@ -6,8 +6,9 @@
 //  Copyright (c) TODAYS_YEAR PROJECT_OWNER. All rights reserved.
 //
 
+#import <Flutter/Flutter.h>
 @import UIKit;
 
-@interface CPDViewController : UIViewController
+@interface CPDViewController : FlutterViewController
 
 @end
